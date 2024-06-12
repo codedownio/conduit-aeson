@@ -288,7 +288,7 @@ valueParser ::
      Atto.Parser a
   -- ^ Suffix parser
   -> Atto.Parser Aeson.Value
-valueParser dp = skipSpace *> json' <* dp
+valueParser dp = skipSpace *> Aeson.json' <* dp
 
 -- | Parse a JSON value followed either by a delimiter or terminating
 -- character @']'@, which is also supplied to the delimiter parser. Nothing is
@@ -301,7 +301,7 @@ valueMaybeParser ::
   -> Atto.Parser (Maybe Aeson.Value)
 valueMaybeParser dp =
   let t = ']'
-   in skipSpace *> ((Nothing <$ Atto8.char t) <|> (Just <$> json' <* dp t))
+   in skipSpace *> ((Nothing <$ Atto8.char t) <|> (Just <$> Aeson.json' <* dp t))
 
 -- | Consume @'{'@ with all preceeding space characters
 --
